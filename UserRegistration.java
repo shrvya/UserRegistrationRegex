@@ -1,11 +1,14 @@
 package com.regularexpression.regularexpression;
 
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /*
  * this class has a method to validate the details of user
  */
 public class UserRegistration {
+	static Scanner sc = new Scanner(System.in);
+
 	/*
 	 * this method will take one String parameter firstname variable regex will have
 	 * the pattern to be matched this method will return true is pattern is matched
@@ -61,5 +64,52 @@ public class UserRegistration {
 		String regex = "^(?=.*[A-Z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
 		Pattern pattern = Pattern.compile(regex);
 		return pattern.matcher(password).matches();
+	}
+
+	public static void main(String args[]) {
+		UserRegistration use = new UserRegistration();
+		System.out.println("enter the first name :");
+		String firstname = sc.next();
+
+		if (use.firstNameValidate(firstname)) {
+			System.out.println("valid first name");
+		} else {
+			System.out.println("invalid first name");
+		}
+
+		System.out.println("enter the last name:");
+		String lastname = sc.next();
+
+		if (use.lastNameValidate(lastname)) {
+			System.out.println("valid lastname name");
+		} else {
+			System.out.println("invalid lastname name");
+		}
+
+		System.out.println("enter the Phone number with country code:");
+		String phone = sc.next();
+
+		if (use.phoneValidate(phone)) {
+			System.out.println("valid Phone number");
+		} else {
+			System.out.println("invalid Phone number");
+		}
+
+		System.out.println("enter the email:");
+		String email = sc.next();
+
+		if (use.emailValidate(email)) {
+			System.out.println("valid email");
+		} else {
+			System.out.println("invalid email");
+		}
+		System.out.println("enter the password:");
+		String password = sc.next();
+
+		if (use.passwordValidate(password)) {
+			System.out.println("valid password");
+		} else {
+			System.out.println("Invalid password");
+		}
 	}
 }
