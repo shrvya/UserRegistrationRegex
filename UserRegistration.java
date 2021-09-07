@@ -54,10 +54,11 @@ public class UserRegistration {
 	/*
 	 * this method will take one String parameter password, variable regex will have
 	 * the pattern to be matched this method will return true is pattern is matched
-	 * false otherwise.matches any password with more than 7 characters
+	 * false otherwise.matches any password with more than 7 characters and atleast
+	 * 1 capital letter
 	 */
 	public Boolean passwordValidate(String password) {
-		String regex = "[0-9a-zA-Z]{8,}$";
+		String regex = "^(?=.*[A-Z]).{8,}$";
 		Pattern pattern = Pattern.compile(regex);
 		return pattern.matcher(password).matches();
 	}
