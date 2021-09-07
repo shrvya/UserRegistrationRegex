@@ -28,4 +28,15 @@ public class UserRegistration {
 		Pattern pattern = Pattern.compile(regex);
 		return pattern.matcher(lastname).matches();
 	}
+
+	/*
+	 * this method will take one String parameter email variable regex will have the
+	 * pattern to be matched this method will return true is pattern is matched
+	 * false otherwise
+	 */
+	public Boolean emailValidate(String email) {
+		String regex = "^[a-zA-Z0-9]+(\\.[a-zA-z]*)?@[a-z]+\\.[a-z]+(\\.?[a-z]*)$";
+		Pattern pattern = Pattern.compile(regex);
+		return pattern.matcher(email).matches();
+	}
 }
