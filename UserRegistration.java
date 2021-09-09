@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
  * this class has a method to validate the details of user
  */
 public class UserRegistration {
+
 	static Scanner sc = new Scanner(System.in);
 
 	/*
@@ -15,8 +16,8 @@ public class UserRegistration {
 	 * false otherwise.name may have capital letters with min 3 alphabets
 	 */
 	public Boolean firstNameValidate(String firstname) {
-		String regex = "[A-Z][A-Za-z]{2,}";
-		Pattern pattern = Pattern.compile(regex);
+		String FIRST_NAME_PATTERN = "[A-Z][A-Za-z]{2,}";
+		Pattern pattern = Pattern.compile(FIRST_NAME_PATTERN);
 		return pattern.matcher(firstname).matches();
 	}
 
@@ -26,8 +27,8 @@ public class UserRegistration {
 	 * false otherwise.name may have capital letters with min 3 alphabets
 	 */
 	public Boolean lastNameValidate(String lastname) {
-		String regex = "[A-Z][A-Za-z]{2,}";
-		Pattern pattern = Pattern.compile(regex);
+		String LAST_NAME_PATTERN = "[A-Z][A-Za-z]{2,}";
+		Pattern pattern = Pattern.compile(LAST_NAME_PATTERN);
 		return pattern.matcher(lastname).matches();
 	}
 
@@ -37,8 +38,8 @@ public class UserRegistration {
 	 * false otherwise.mail has 3 compulsory and 2 optional part
 	 */
 	public Boolean emailValidate(String email) {
-		String regex = "^[a-zA-Z0-9]+(\\.[a-zA-z]*)?@[a-z]+\\.[a-z]+(\\.?[a-z]*)$";
-		Pattern pattern = Pattern.compile(regex);
+		String EMAIL_NAME_PATTERN = "^[a-zA-Z0-9]+(\\.[a-zA-z]*)?@[a-z]+\\.[a-z]+(\\.?[a-z]*)$";
+		Pattern pattern = Pattern.compile(EMAIL_NAME_PATTERN);
 		return pattern.matcher(email).matches();
 	}
 
@@ -49,8 +50,8 @@ public class UserRegistration {
 	 * optional space between these two
 	 */
 	public Boolean phoneValidate(String phone) {
-		String regex = "^[0-9]{2}\s?[0-9]{10}";
-		Pattern pattern = Pattern.compile(regex);
+		String PHONE_NUMBER_PATTERN = "^[0-9]{2}\s?[0-9]{10}";
+		Pattern pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
 		return pattern.matcher(phone).matches();
 	}
 
@@ -61,12 +62,12 @@ public class UserRegistration {
 	 * 1 capital letter and atleast 1 number and 1 special character
 	 */
 	public Boolean passwordValidate(String password) {
-		String regex = "^(?=.*[A-Z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
-		Pattern pattern = Pattern.compile(regex);
+		String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
+		Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 		return pattern.matcher(password).matches();
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws InvalidUserException {
 		UserRegistration use = new UserRegistration();
 		System.out.println("enter the first name :");
 		String firstname = sc.next();
@@ -74,7 +75,7 @@ public class UserRegistration {
 		if (use.firstNameValidate(firstname)) {
 			System.out.println("valid first name");
 		} else {
-			System.out.println("invalid first name");
+			throw new InvalidUserException("Invalid First name!!!");
 		}
 
 		System.out.println("enter the last name:");
@@ -83,16 +84,17 @@ public class UserRegistration {
 		if (use.lastNameValidate(lastname)) {
 			System.out.println("valid lastname name");
 		} else {
-			System.out.println("invalid lastname name");
+			throw new InvalidUserException("Invalid Last name!!");
+
 		}
 
 		System.out.println("enter the Phone number with country code:");
 		String phone = sc.next();
 
 		if (use.phoneValidate(phone)) {
-			System.out.println("valid Phone number");
+			System.out.println("valid Phone number!!");
 		} else {
-			System.out.println("invalid Phone number");
+			throw new InvalidUserException("Invalid Phone number");
 		}
 
 		System.out.println("enter the email:");
@@ -101,7 +103,7 @@ public class UserRegistration {
 		if (use.emailValidate(email)) {
 			System.out.println("valid email");
 		} else {
-			System.out.println("invalid email");
+			throw new InvalidUserException("Invalid email!!");
 		}
 		System.out.println("enter the password:");
 		String password = sc.next();
@@ -109,7 +111,7 @@ public class UserRegistration {
 		if (use.passwordValidate(password)) {
 			System.out.println("valid password");
 		} else {
-			System.out.println("Invalid password");
+			throw new InvalidUserException("Invalid password!!");
 		}
 	}
 }
